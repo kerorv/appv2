@@ -8,6 +8,16 @@
       "type": "shell",
       "command": "cl.exe",
       "args": [
+        "/D",
+        "_WIN32_WINNT=0x0501",
+        "/D",
+        "ASIO_STANDALONE",
+        "/D",
+        "ASIO_MSVC",
+        "/D",
+        "ASIO_NO_DEPRECATED",
+        "/D",
+        "ASIO_HAS_SECURE_RTL",
         "/EHsc",
         "/Zi",
         "/await",
@@ -23,7 +33,10 @@
         "event_loop.cpp",
         "tick_timer.cpp",
         "timer.cpp",
-        "app.cpp"
+        "app.cpp",
+        "net_engine.cpp",
+        "output_channel.cpp",
+        "input_channel.cpp"
       ],
       "group": {
         "kind": "build",
