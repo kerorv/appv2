@@ -3,17 +3,7 @@
 #include <vector>
 #include "callback.h"
 
-struct TimerNode;
-struct TickTimerID
-{
-  TimerNode* ptr{nullptr};
-  uint64_t id{0};
-
-  bool operator==(const TickTimerID& other) const;
-  bool IsValid() const;
-};
-
-using TickTimerCallback = async::Callback<void(TickTimerID)>;
+using TickTimerCallback = async::Callback<void()>;
 
 struct TimerNode
 {
@@ -35,6 +25,15 @@ struct TimerNode
     , valid(0)
   {
   }
+};
+
+struct TickTimerID
+{
+  TimerNode* ptr{nullptr};
+  uint64_t id{0};
+
+  bool operator==(const TickTimerID& other) const;
+  bool IsValid() const;
 };
 
 class TickTimerWheel

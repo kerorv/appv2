@@ -149,7 +149,14 @@ void TickTimerManager::RunTick()
 
     if (node->valid)
     {
-      node->callback.Invoke(TickTimerID{node, node->tid});
+      if (!node->callback.Callable())
+      {
+        node->valid = false;
+      }
+      else
+      {
+        node->callback.Invoke();
+      }
     }
 
     if (!node->valid || !node->periodic)

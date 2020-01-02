@@ -4,7 +4,7 @@
 
 ////////////////////////////////////////////////////////////////////
 // Timer
-Timer::Timer(EventLoopT& loop)
+Timer::Timer(EventLoop& loop)
   : loop_(loop)
 {
 }

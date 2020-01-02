@@ -5,13 +5,13 @@
 #include "event_poller.h"
 #include "tick_timer.h"
 
-class EventLoopT final
+class EventLoop final
 {
   friend class Timer;
 
 public:
-  EventLoopT();
-  ~EventLoopT() = default;
+  EventLoop();
+  ~EventLoop() = default;
 
   void Run();
   void Stop();

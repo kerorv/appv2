@@ -4,6 +4,7 @@
 #include "event_poller.h"
 
 std::chrono::system_clock::time_point start_time;
+static uint32_t second_tick = 0;
 
 void PrintTime(std::chrono::system_clock::time_point tp)
 {
@@ -15,7 +16,7 @@ void PrintTime(std::chrono::system_clock::time_point tp)
     tm->tm_mday, tm->tm_hour, tm->tm_min, tm->tm_sec, ms.count());
 }
 
-void OnTimer(TickTimerID tid)
+void OnTimer()
 {
   std::cout << "Start time: ";
   PrintTime(start_time);
@@ -30,6 +31,14 @@ void OnTimer(TickTimerID tid)
   std::cout << std::endl;
 
   std::cout << std::endl;
+
+  second_tick = 0;
+}
+
+void OnTimer2()
+{
+  ++second_tick;
+  printf("%u\n", second_tick);
 }
 
 int main(int argc, char* argv[])
@@ -40,9 +49,13 @@ int main(int argc, char* argv[])
   std::cout << "\n" << std::endl;
 
   AppTimer timer;
-  auto callback = async::Bind<void(TickTimerID)>(&OnTimer);
+  auto callback = async::Bind<void()>(&OnTimer);
   using namespace std::chrono_literals;
   timer.StartRepeat(10s, callback);
+
+  AppTimer timer2;
+  auto callback2 = async::Bind<void()>(&OnTimer2);
+  timer2.StartRepeat(1s, callback2);
 
   App::Instance().Start();
 

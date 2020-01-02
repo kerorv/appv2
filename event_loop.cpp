@@ -1,6 +1,6 @@
 #include "event_loop.h"
 
-EventLoopT::EventLoopT()
+EventLoop::EventLoop()
   : poller_(
       std::chrono::duration_cast<std::chrono::milliseconds>(kOneTickPeriod)
         .count())
@@ -9,7 +9,7 @@ EventLoopT::EventLoopT()
 {
 }
 
-void EventLoopT::Run()
+void EventLoop::Run()
 {
   stop_action_ = false;
   std::deque<Handler> handlers;
@@ -35,7 +35,7 @@ void EventLoopT::Run()
   }
 }
 
-void EventLoopT::Stop()
+void EventLoop::Stop()
 {
   Post([this]() { stop_action_ = true; });
 }

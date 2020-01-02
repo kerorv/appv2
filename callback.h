@@ -27,15 +27,25 @@ public:
   {
   }
 
-  template <typename... Args>
-  void Invoke(Args&&... args) const
+  bool Callable() const
   {
     if (!func_)
     {
-      return;
+      return false;
     }
 
     if (monitor_.IsValid() && !monitor_.IsAlive())
+    {
+      return false;
+    }
+
+    return true;
+  }
+
+  template <typename... Args>
+  void Invoke(Args&&... args) const
+  {
+    if (!Callable())
     {
       return;
     }

@@ -17,18 +17,19 @@ public:
   void Stop();
 
   std::chrono::system_clock::time_point WallTime() const { return wall_time_; }
-  EventLoopT& GetLoop() { return loop_; }
+  EventLoop& GetLoop() { return loop_; }
 
 private:
   App();
   ~App() = default;
 
-  void OnTick(TickTimerID);
+  void OnTick();
 
 private:
-  EventLoopT loop_;
+  EventLoop loop_;
   Timer tick_timer_;
   std::chrono::system_clock::time_point wall_time_;
+  std::chrono::steady_clock::time_point tick_time_;
 };
 
 #define AppInst App::Instance()

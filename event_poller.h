@@ -2,7 +2,7 @@
 
 #if defined(_WIN32)
 #include "win_event_poller.h"
-#define EventLoop WinEventPooler
+#define EventPooler WinEventPooler
 #else
 #error "unsupport platform"
 #endif

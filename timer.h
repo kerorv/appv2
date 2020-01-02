@@ -3,11 +3,11 @@
 #include <chrono>
 #include "tick_timer.h"
 
-class EventLoopT;
+class EventLoop;
 class Timer
 {
 public:
-  Timer(EventLoopT& loop);
+  Timer(EventLoop& loop);
   ~Timer();
 
   void StartRepeat(std::chrono::milliseconds interval, const TickTimerCallback& callback);
@@ -17,7 +17,7 @@ public:
   TickTimerID GetID() const { return tid_; }
 
 private:
-  EventLoopT& loop_;
+  EventLoop& loop_;
   TickTimerID tid_;
 };
 
